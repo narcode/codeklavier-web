@@ -17,7 +17,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   },
   {
     "revision": "981e44092eb79f9a94965615e70ea7d1",
-    "url": "/images/asia/3 Chennai.png"
+    "url": "/images/asia/3.png"
   },
   {
     "revision": "4f67f748f2a691a85dcc2c56159b953b",
@@ -52,7 +52,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/images/oceania/29.jpg"
   },
   {
-    "revision": "41bdd2451674f5021c6cd79e6bd4b178",
+    "revision": "a3d02b565f4d90fc900a43bb6fcafe3b",
     "url": "/index.html"
   },
   {
@@ -64,12 +64,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/manifest.json"
   },
   {
-    "revision": "925df759fbbb58fc22cd",
+    "revision": "7a3660db56912c68a505",
     "url": "/static/css/main.9a5a3e29.chunk.css"
   },
   {
-    "revision": "925df759fbbb58fc22cd",
-    "url": "/static/js/main.925df759.chunk.js"
+    "revision": "7a3660db56912c68a505",
+    "url": "/static/js/main.7a3660db.chunk.js"
   },
   {
     "revision": "1b922744246c39b6bc43",

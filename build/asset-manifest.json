@@ -1,7 +1,7 @@
 {
   "main.css": "/static/css/main.9a5a3e29.chunk.css",
-  "main.js": "/static/js/main.925df759.chunk.js",
-  "main.js.map": "/static/js/main.925df759.chunk.js.map",
+  "main.js": "/static/js/main.7a3660db.chunk.js",
+  "main.js.map": "/static/js/main.7a3660db.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.1b922744.js",
   "runtime~main.js.map": "/static/js/runtime~main.1b922744.js.map",
   "vendors~main.js": "/static/js/vendors~main.b9063112.chunk.js",
@@ -11,7 +11,7 @@
   "images/AVeinberg.jpg": "/images/AVeinberg.jpg",
   "images/africa/8.jpg": "/images/africa/8.jpg",
   "images/asia/19.mp4": "/images/asia/19.mp4",
-  "images/asia/3 Chennai.png": "/images/asia/3 Chennai.png",
+  "images/asia/3.png": "/images/asia/3.png",
   "images/asia/30.png": "/images/asia/30.png",
   "images/asia/76.png": "/images/asia/76.png",
   "images/europe/100.jpg": "/images/europe/100.jpg",
@@ -23,5 +23,5 @@
   "index.html": "/index.html",
   "logo.svg": "/logo.svg",
   "manifest.json": "/manifest.json",
-  "precache-manifest.f0a84054134c0a8106f47398e6a7a937.js": "/precache-manifest.f0a84054134c0a8106f47398e6a7a937.js"
+  "precache-manifest.05416c6f1d40aef13baed491125e137f.js": "/precache-manifest.05416c6f1d40aef13baed491125e137f.js"
 }
