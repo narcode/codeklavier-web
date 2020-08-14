@@ -19,7 +19,7 @@ ws.onmessage = function(event) {
 
 function scrollDisplays(data) {
   let d1 = document.querySelector('#display1');
-  let d2 = document.querySelector('#display2'); d
+  let d2 = document.querySelector('#display2');
   let d3 = document.querySelector('#display3');
   let d4 = document.querySelector('#display4');
 
