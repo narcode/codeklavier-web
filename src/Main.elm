@@ -37,7 +37,7 @@ init =
     []
     []
     False
-    ""
+    "asia"
     ""
     , Cmd.none )
 
@@ -124,10 +124,7 @@ view model =
                 HA.style "opacity" "1"
               else
                 HA.style "opacity" "0"
-              ] [
-              h3 [] [ text "Codeklavier Console" ]
-              , div [ HA.class "ck_console" ] model.console
-            ]
+              ] [ div [ HA.class "ck_console" ] model.console ]
         ]
 
 
