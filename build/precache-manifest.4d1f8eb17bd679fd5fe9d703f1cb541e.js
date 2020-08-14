@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/images/AVeinberg.jpg"
   },
   {
-    "revision": "8c2faa7f65d44e84ad32257eeaf029bc",
+    "revision": "dc596cbe8be862788cf069bce141d15c",
     "url": "/index.html"
   },
   {
@@ -20,12 +20,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/manifest.json"
   },
   {
-    "revision": "a3fdb8f6fa191b5ccb8d",
+    "revision": "ea41ec58c46a0a736dbe",
     "url": "/static/css/main.90993995.chunk.css"
   },
   {
-    "revision": "a3fdb8f6fa191b5ccb8d",
-    "url": "/static/js/main.a3fdb8f6.chunk.js"
+    "revision": "ea41ec58c46a0a736dbe",
+    "url": "/static/js/main.ea41ec58.chunk.js"
   },
   {
     "revision": "1b922744246c39b6bc43",
