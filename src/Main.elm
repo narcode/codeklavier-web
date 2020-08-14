@@ -55,7 +55,7 @@ update msg model =
           case res.display of
             "1" -> ( {model | display1 = model.display1 ++ wrapIt }, Cmd.none )
             "2" -> ( {model | display2 = model.display2 ++ wrapIt }, Cmd.none )
-            "3" -> ( {model | display3 = model.display3 ++ wrapIt }, Cmd.none )
+            "3" -> ( {model | display3 = wrapIt }, Cmd.none )
             "4" -> ( {model | display4 = model.display4 ++ wrapIt }, Cmd.none )
             _ -> (model, Cmd.none)
 
