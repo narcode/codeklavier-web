@@ -52,7 +52,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/images/oceania/29.jpg"
   },
   {
-    "revision": "a3d02b565f4d90fc900a43bb6fcafe3b",
+    "revision": "833c60d2b328a9f7e88c2d058b0b4824",
     "url": "/index.html"
   },
   {
@@ -64,12 +64,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/manifest.json"
   },
   {
-    "revision": "7a3660db56912c68a505",
+    "revision": "6f930f2b6080727664dc",
     "url": "/static/css/main.9a5a3e29.chunk.css"
   },
   {
-    "revision": "7a3660db56912c68a505",
-    "url": "/static/js/main.7a3660db.chunk.js"
+    "revision": "6f930f2b6080727664dc",
+    "url": "/static/js/main.6f930f2b.chunk.js"
   },
   {
     "revision": "1b922744246c39b6bc43",

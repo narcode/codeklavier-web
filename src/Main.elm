@@ -117,7 +117,7 @@ view model =
             , if String.isEmpty model.current_img_folder then
                 HA.style "background-image" "url(../images/AVeinberg.jpg)"
               else
-                HA.style "background-image" ("url(../images/" ++ model.current_img_folder ++ model.loadImg ++ ".png)" )
+                HA.style "background-image" ("url(../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".png)" )
               ] []
           , div [ HA.class "ck_console_container"
             , if model.console_open then
