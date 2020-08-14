@@ -60,7 +60,6 @@ update msg model =
             _ -> (model, Cmd.none)
 
         Err error ->
-          Debug.log ( "Error" ++ (Debug.toString error) )
           (model, Cmd.none)
 
 

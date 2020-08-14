@@ -1,0 +1,16 @@
+{
+  "main.css": "/static/css/main.90993995.chunk.css",
+  "main.js": "/static/js/main.e0ad88f4.chunk.js",
+  "main.js.map": "/static/js/main.e0ad88f4.chunk.js.map",
+  "runtime~main.js": "/static/js/runtime~main.1b922744.js",
+  "runtime~main.js.map": "/static/js/runtime~main.1b922744.js.map",
+  "vendors~main.js": "/static/js/vendors~main.b9063112.chunk.js",
+  "vendors~main.js.map": "/static/js/vendors~main.b9063112.chunk.js.map",
+  "./service-worker.js": "/./service-worker.js",
+  "favicon.ico": "/favicon.ico",
+  "images/AVeinberg.jpg": "/images/AVeinberg.jpg",
+  "index.html": "/index.html",
+  "logo.svg": "/logo.svg",
+  "manifest.json": "/manifest.json",
+  "precache-manifest.cfed1c52efde5e33b52e26d551408451.js": "/precache-manifest.cfed1c52efde5e33b52e26d551408451.js"
+}
