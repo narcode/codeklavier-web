@@ -7,8 +7,8 @@ const app = Elm.Main.init({
 });
 
 // WebSocket
-// let endpoint = '192.168.1.11' //localip address
-let endpoint = '192.168.178.108'
+let endpoint = '192.168.1.11' //localip address
+// let endpoint = '192.168.178.108'
 let ws = new WebSocket("ws://"+endpoint+":8081/ckar_consume")
 
 ws.onmessage = function(event) {
@@ -19,7 +19,7 @@ ws.onmessage = function(event) {
 
 function scrollDisplays(data) {
   let d1 = document.querySelector('#display1');
-  let d2 = document.querySelector('#display2');
+  let d2 = document.querySelector('#display2'); d
   let d3 = document.querySelector('#display3');
   let d4 = document.querySelector('#display4');
 
