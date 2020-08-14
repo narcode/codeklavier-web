@@ -38,7 +38,7 @@ init =
     []
     False
     "asia"
-    ""
+    "anne"
     , Cmd.none )
 
 
