@@ -1,5 +1,5 @@
 
-let endpoint = '192.168.178.108'
+let endpoint = '192.168.178.108' //localip address 
 let ws = new WebSocket("ws://"+endpoint+":8081/ckar_consume")
 
 
