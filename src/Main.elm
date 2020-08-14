@@ -82,7 +82,7 @@ update msg model =
 
             "4" -> ( {model | display4 = model.display4 ++ wrapIt }, Cmd.none )
 
-            "console" -> ( {model | console = wrapIt, loadImg = "" }, Cmd.none )
+            "console" -> ( {model | console = wrapIt }, Cmd.none )
 
             "cmd" ->
                 case res.payload of

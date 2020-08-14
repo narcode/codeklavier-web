@@ -7,8 +7,8 @@ const app = Elm.Main.init({
 });
 
 // WebSocket
-let endpoint = '192.168.1.11' //localip address
-// let endpoint = '192.168.178.108'
+// let endpoint = '192.168.1.11' //localip address
+let endpoint = '192.168.178.108'
 let ws = new WebSocket("ws://"+endpoint+":8081/ckar_consume")
 
 ws.onmessage = function(event) {

@@ -6,7 +6,7 @@ body{
 font-family: 'Courier';
 height: 100%;
 margin:0;
-background-color: black;
+background-color: white;
 }
 
 .container{
@@ -49,24 +49,31 @@ background-color: #ffffff8c;
 
 #display1, #display2, #display3, #display4{
 width: 25%;
-overflow: auto;
-overflow-wrap: break-word;
+display: flex;
+flex-wrap: wrap;
 height: 100%;
 padding: 10px;
 border: 2px solid black;
 margin: 10px;
+align-items: start;
 }
 
 #display1{
-font-size: 24px;
+font-size: 120%;
 }
 
-#display2,#display4{
-font-size: 32px;
+#display2{
+font-size: 180%;
 }
 
 #display3{
-font-size: 100px
+font-size: 220%;
+}
+
+#display4{
+font-size: 100%;
+display: flex;
+flex-flow: column;
 }
 
 .codespan{
@@ -80,12 +87,15 @@ width: 100%;
 background-color: black;
 bottom: 0;
 text-align: center;
-font-size: 30px;
+font-size: 120%;
 color: lime;
 border: 15px outset lime;
+display: flex;
+align-items: center;
+justify-content: center;
 transition:opacity 1s;
 }
 
 .ck_console{
-font-size: 80px;
+font-size: 300%;
 }
