@@ -1,9 +1,10 @@
 port module Main exposing (..)
 
 import Browser
-import Html exposing (Html, text, div, h1, h2, h3,span)
+import Html exposing (Html, text, div, h1, h2, h3, br, span)
 import Html.Attributes as HA
 import Json.Decode as D
+import EasterEggs as EE
 
 
 ---- MODEL ----
@@ -16,6 +17,8 @@ type alias Model =
     , display4: List (Html Msg)
     , console: List (Html Msg)
     , console_open: Bool
+    , current_img_folder: String
+    , loadImg: String
     }
 
 type alias CK_Message =
@@ -27,7 +30,16 @@ type alias CK_Message =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { display1 = [], display2 = [], display3 = [], display4 = [], console = [], console_open = False }, Cmd.none )
+    ( Model
+    []
+    []
+    []
+    []
+    []
+    False
+    ""
+    ""
+    , Cmd.none )
 
 
 -- PORTS
@@ -54,15 +66,29 @@ update msg model =
               wrapIt = [ span [ HA.class "codespan"] [ text res.payload ] ]
           in
           case res.display of
-            "1" -> ( {model | display1 = model.display1 ++ wrapIt }, Cmd.none )
+            "1" ->
+              if not model.console_open then
+                ( {model | display1 = model.display1 ++ wrapIt }, Cmd.none )
+              else
+                ( {model | console = wrapIt }, Cmd.none )
+
             "2" -> ( {model | display2 = model.display2 ++ wrapIt }, Cmd.none )
-            "3" -> ( {model | display3 = wrapIt }, Cmd.none )
+
+            "3" ->
+              if List.member res.payload ( List.map String.fromInt <| EE.magicnumbers(model.current_img_folder) ) then
+                ( {model | display3 = wrapIt, loadImg = res.payload }, Cmd.none )
+              else
+                ( {model | display3 = wrapIt }, Cmd.none )
+
             "4" -> ( {model | display4 = model.display4 ++ wrapIt }, Cmd.none )
-            "console" -> ( {model | console = wrapIt }, Cmd.none )
+
+            "console" -> ( {model | console = wrapIt, loadImg = "" }, Cmd.none )
+
             "cmd" ->
                 case res.payload of
                   "openconsole" -> ( { model | console_open = True }, Cmd.none )
                   "closeconsole" -> ( { model | console_open = False }, Cmd.none )
+                  "changeimagefolder" -> ( { model | current_img_folder = res.key }, Cmd.none)
                   _ -> (model, Cmd.none)
 
             _ -> (model, Cmd.none)
@@ -87,7 +113,12 @@ view model =
             , h2 [] [ text "piano functions" ]
           ]
           , ( div [HA.class "codecontainer"] ( [] ++ ( makeDisplays model 4 [ span [] [] ] ) ) )
-          , div [ HA.class "imgcontainer", HA.style "background-image" "url(../images/AVeinberg.jpg)" ] []
+          , div [ HA.class "imgcontainer"
+            , if String.isEmpty model.current_img_folder then
+                HA.style "background-image" "url(../images/AVeinberg.jpg)"
+              else
+                HA.style "background-image" ("url(../images/" ++ model.current_img_folder ++ "14.png)" )
+              ] []
           , div [ HA.class "ck_console_container"
             , if model.console_open then
                 HA.style "opacity" "1"
@@ -122,7 +153,7 @@ getDisplayText model display =
       1 -> model.display1
       2 -> model.display2
       3 -> model.display3
-      4 -> model.display4
+      4 -> model.display4 ++ [ br [] [] ]
       _ -> [ span [] [] ]
 
 ckdecoder: D.Decoder CK_Message

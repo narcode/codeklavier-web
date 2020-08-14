@@ -57,8 +57,12 @@ border: 2px solid black;
 margin: 10px;
 }
 
-#display1, #display2, #display4{
-font-size: 48px;
+#display1{
+font-size: 24px;
+}
+
+#display2,#display4{
+font-size: 32px;
 }
 
 #display3{
@@ -66,7 +70,7 @@ font-size: 100px
 }
 
 .codespan{
-margin-right: 5px;
+margin-right: 10px;
 }
 
 .ck_console_container{
