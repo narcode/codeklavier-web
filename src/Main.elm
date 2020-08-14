@@ -1,7 +1,7 @@
 port module Main exposing (..)
 
 import Browser
-import Html exposing (Html, text, div, h1, h2, span)
+import Html exposing (Html, text, div, h1, h2, h3,span)
 import Html.Attributes as HA
 import Json.Decode as D
 
@@ -14,6 +14,8 @@ type alias Model =
     , display2: List (Html Msg)
     , display3: List (Html Msg)
     , display4: List (Html Msg)
+    , console: List (Html Msg)
+    , console_open: Bool
     }
 
 type alias CK_Message =
@@ -25,7 +27,7 @@ type alias CK_Message =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { display1 = [], display2 = [], display3 = [], display4 = [] }, Cmd.none )
+    ( { display1 = [], display2 = [], display3 = [], display4 = [], console = [], console_open = False }, Cmd.none )
 
 
 -- PORTS
@@ -51,12 +53,18 @@ update msg model =
           let
               wrapIt = [ span [ HA.class "codespan"] [ text res.payload ] ]
           in
-
           case res.display of
             "1" -> ( {model | display1 = model.display1 ++ wrapIt }, Cmd.none )
             "2" -> ( {model | display2 = model.display2 ++ wrapIt }, Cmd.none )
             "3" -> ( {model | display3 = wrapIt }, Cmd.none )
             "4" -> ( {model | display4 = model.display4 ++ wrapIt }, Cmd.none )
+            "console" -> ( {model | console = wrapIt }, Cmd.none )
+            "cmd" ->
+                case res.payload of
+                  "openconsole" -> ( { model | console_open = True }, Cmd.none )
+                  "closeconsole" -> ( { model | console_open = False }, Cmd.none )
+                  _ -> (model, Cmd.none)
+
             _ -> (model, Cmd.none)
 
         Err error ->
@@ -80,6 +88,15 @@ view model =
           ]
           , ( div [HA.class "codecontainer"] ( [] ++ ( makeDisplays model 4 [ span [] [] ] ) ) )
           , div [ HA.class "imgcontainer", HA.style "background-image" "url(../images/AVeinberg.jpg)" ] []
+          , div [ HA.class "ck_console_container"
+            , if model.console_open then
+                HA.style "opacity" "1"
+              else
+                HA.style "opacity" "0"
+              ] [
+              h3 [] [ text "Codeklavier Console" ]
+              , div [ HA.class "ck_console" ] model.console
+            ]
         ]
 
 

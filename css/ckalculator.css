@@ -62,9 +62,26 @@ font-size: 48px;
 }
 
 #display3{
-font-size: 200px
+font-size: 100px
 }
 
 .codespan{
 margin-right: 5px;
+}
+
+.ck_console_container{
+position: fixed;
+height: 70%;
+width: 100%;
+background-color: black;
+bottom: 0;
+text-align: center;
+font-size: 30px;
+color: lime;
+border: 15px outset lime;
+transition:opacity 1s;
+}
+
+.ck_console{
+font-size: 80px;
 }
