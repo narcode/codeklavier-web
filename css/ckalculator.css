@@ -1,0 +1,10 @@
+.container{
+width:100%;
+}
+
+#display1{
+    width: 300px;
+    overflow: auto;
+    overflow-wrap: break-word;
+    height: 800px;
+}
