@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0b4310b82877aeca802b51a1fa75961c",
+    "revision": "ab30c27123524716b741774dc46afc88",
     "url": "/.DS_Store"
   },
   {
@@ -8,12 +8,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/favicon.ico"
   },
   {
-    "revision": "f419dd5a9e0075a9e98d39256467e29b",
+    "revision": "1eba77827d5e0784ebf1830192f8ca62",
     "url": "/images/.DS_Store"
   },
   {
-    "revision": "e2719486e8420a71de6925cd06fae2df",
-    "url": "/images/africa/8.jpg"
+    "revision": "194577a7e20bdcc7afbb718f502c134c",
+    "url": "/images/africa/.DS_Store"
+  },
+  {
+    "revision": "da42fe8151d5fa8a0dba44a01967d55a",
+    "url": "/images/africa/8.png"
   },
   {
     "revision": "a6d26c295208b99944433ad239e92f45",
@@ -36,8 +40,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/images/asia/anne.png"
   },
   {
-    "revision": "13aeb7f02573e6fe5f1360fb7cfcfb6c",
-    "url": "/images/europe/100.jpg"
+    "revision": "194577a7e20bdcc7afbb718f502c134c",
+    "url": "/images/europe/.DS_Store"
+  },
+  {
+    "revision": "b29fda60688b6ce04d572f40c49b53e3",
+    "url": "/images/europe/100.png"
   },
   {
     "revision": "be2ab83a45c7a4b9f8e98c6061c7463f",
@@ -56,11 +64,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/images/europe/155.png"
   },
   {
-    "revision": "b0aa642ab34a3f7e4ba32e37dcb356f9",
-    "url": "/images/oceania/29.jpg"
+    "revision": "194577a7e20bdcc7afbb718f502c134c",
+    "url": "/images/oceania/.DS_Store"
   },
   {
-    "revision": "e1d79c13a5ff3e167ed15db96b3e9d3c",
+    "revision": "33683f677ca2da1b87026e479817ff9d",
+    "url": "/images/oceania/29.png"
+  },
+  {
+    "revision": "a0bab9f899871d06b4f3f31b29ba8e4b",
     "url": "/index.html"
   },
   {
@@ -72,12 +84,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/manifest.json"
   },
   {
-    "revision": "11b2fac1e50763bb278c",
-    "url": "/static/css/main.9a5a3e29.chunk.css"
+    "revision": "67c65e2cf0b094333ad2",
+    "url": "/static/css/main.cf20227e.chunk.css"
   },
   {
-    "revision": "11b2fac1e50763bb278c",
-    "url": "/static/js/main.11b2fac1.chunk.js"
+    "revision": "67c65e2cf0b094333ad2",
+    "url": "/static/js/main.67c65e2c.chunk.js"
   },
   {
     "revision": "1b922744246c39b6bc43",
