@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ab30c27123524716b741774dc46afc88",
+    "revision": "5d0f5c45eaa50a6f9a85f485e73bcd51",
     "url": "/.DS_Store"
   },
   {
@@ -36,8 +36,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/images/asia/76.png"
   },
   {
-    "revision": "acc2907a07ab2d41205f28d7106c6ee0",
-    "url": "/images/asia/anne.png"
+    "revision": "37277de75311f3c8d26ed75a0cf219f5",
+    "url": "/images/asia/welcome.png"
   },
   {
     "revision": "194577a7e20bdcc7afbb718f502c134c",
@@ -72,7 +72,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/images/oceania/29.png"
   },
   {
-    "revision": "a0bab9f899871d06b4f3f31b29ba8e4b",
+    "revision": "c446b8deb25d14556aa31f0bba37afaf",
     "url": "/index.html"
   },
   {
@@ -84,12 +84,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/manifest.json"
   },
   {
-    "revision": "67c65e2cf0b094333ad2",
-    "url": "/static/css/main.cf20227e.chunk.css"
+    "revision": "b852d9c1b9b27149cabf",
+    "url": "/static/css/main.5cbf8a14.chunk.css"
   },
   {
-    "revision": "67c65e2cf0b094333ad2",
-    "url": "/static/js/main.67c65e2c.chunk.js"
+    "revision": "b852d9c1b9b27149cabf",
+    "url": "/static/js/main.b852d9c1.chunk.js"
   },
   {
     "revision": "1b922744246c39b6bc43",
