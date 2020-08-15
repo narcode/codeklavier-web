@@ -22,6 +22,7 @@ type alias Model =
     , loadImg: String
     , websocket_host: String
     , connected: Bool
+    , eggDisplayed: Bool
     }
 
 type alias CK_Message =
@@ -44,6 +45,7 @@ init =
     "welcome"
     ""
     False
+    False
     , Cmd.none )
 
 
@@ -65,7 +67,11 @@ update msg model =
   case msg of
     UpdateIP string -> ( { model | websocket_host = string }, Cmd.none )
 
-    Connect -> ( { model | connected = True }, sendMessage model.websocket_host )
+    Connect ->
+      if not (String.isEmpty model.websocket_host) then
+        ( { model | connected = True }, sendMessage model.websocket_host )
+      else
+        ( model, Cmd.none )
 
     Recv string ->
       let
@@ -78,22 +84,27 @@ update msg model =
           in
           case res.display of
             "1" ->
-              if not model.console_open then
-                ( {model | display1 = model.display1 ++ wrapIt }, Cmd.none )
-              else
-                ( {model | console = wrapIt }, Cmd.none )
+              case res.key of
+                "eval" -> ( {model | display1 = model.display1 ++ wrapIt ++ [ br [] [], br [] [] ] }, Cmd.none )
+                _ -> ( {model | display1 = model.display1 ++ wrapIt }, Cmd.none )
 
-            "2" -> ( {model | display2 = model.display2 ++ wrapIt }, Cmd.none )
+            "2" ->
+              case res.key of
+                "eval" -> ( {model | display2 = model.display2 ++ wrapIt ++ [ br [] [], br [] [] ] }, Cmd.none )
+                _ -> ( {model | display2 = model.display2 ++ wrapIt }, Cmd.none )
+
 
             "3" ->
               if List.member res.payload ( List.map String.fromInt <| EE.magicnumbers(model.current_img_folder) ) then
-                ( {model | display3 = wrapIt, loadImg = res.payload }, Cmd.none )
+                ( {model | display3 = wrapIt, loadImg = res.payload
+                  , display1 = model.display1 ++ [ br [] [], br [] [] ]
+                  , eggDisplayed = True  }, Cmd.none )
               else
-                ( {model | display3 = wrapIt }, Cmd.none )
+                ( {model | display3 = wrapIt, eggDisplayed = False }, Cmd.none )
 
             "4" -> ( {model | display4 = model.display4 ++ wrapIt }, Cmd.none )
 
-            "console" -> ( {model | console = wrapIt, display1 = wrapIt }, Cmd.none )
+            "console" -> ( {model | console = wrapIt }, Cmd.none )
 
             "cmd" ->
                 case res.payload of
@@ -137,23 +148,31 @@ view model =
             , ( div [HA.class "codecontainer"] ( [] ++ ( makeDisplays model 4 [ span [] [] ] ) ) )
             , div [ HA.class "imgcontainer"
               , if String.isEmpty model.current_img_folder then
-                  HA.style "background-color" "black"
+                  HA.style "background-image" ("url(../images/welcome.png)" )
                 else
-                  HA.style "background-image" ("url(../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".png)" )
+                  HA.style "background-image" ("url(../images/" ++ model.current_img_folder ++ "/" ++ model.current_img_folder ++ ".png)" )
                 ] []
-            , Html.video ( [ HA.class "vidcontainer" ] ++
-                if String.isEmpty model.current_img_folder then
-                  [ HA.src "" ]
-                else
-                  [ HA.src ("../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".mp4")
-                  , HA.autoplay True, HA.loop True ]
-                  ) []
             , div [ HA.class "ck_console_container"
               , if model.console_open then
                   HA.style "opacity" "1"
                 else
                   HA.style "opacity" "0"
-                ] [ div [ HA.class "ck_console" ] model.console ]
+                ] [ div [ HA.class "ck_console" ] model.console
+                    , if model.eggDisplayed then
+                        Html.img [ HA.src ("../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".png") ] []
+                      else
+                        span [] []
+                    , if model.eggDisplayed && (not (EE.isVideo model.loadImg) ) then
+                        span [ HA.class "videocont" ] [ Html.video ( [ HA.class "vidcontainer" ] ++
+                          if String.isEmpty model.current_img_folder then
+                            [ HA.src "" ]
+                          else
+                            [ HA.src ("../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".mp4")
+                            , HA.autoplay True, HA.loop True ]
+                            ) [] ]
+                      else
+                        span [] []
+                  ]
         ]
 
 
