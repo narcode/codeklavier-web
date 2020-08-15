@@ -23,6 +23,7 @@ type alias Model =
     , websocket_host: String
     , connected: Bool
     , eggDisplayed: Bool
+    , hasVideo: Bool
     }
 
 type alias CK_Message =
@@ -44,6 +45,7 @@ init =
     "asia"
     "welcome"
     ""
+    False
     False
     False
     , Cmd.none )
@@ -96,9 +98,14 @@ update msg model =
 
             "3" ->
               if List.member res.payload ( List.map String.fromInt <| EE.magicnumbers(model.current_img_folder) ) then
-                ( {model | display3 = wrapIt, loadImg = res.payload
-                  , display1 = model.display1 ++ [ br [] [], br [] [] ]
-                  , eggDisplayed = True  }, Cmd.none )
+                if not (EE.isVideo res.payload) then
+                  ( {model | display3 = wrapIt, loadImg = res.payload
+                    , display1 = model.display1 ++ [ br [] [], br [] [] ]
+                    , eggDisplayed = True  }, Cmd.none )
+                else
+                  ( {model | display3 = wrapIt, loadImg = res.payload
+                    , display1 = model.display1 ++ [ br [] [], br [] [] ]
+                    , eggDisplayed = True, hasVideo = True  }, Cmd.none )
               else
                 ( {model | display3 = wrapIt, eggDisplayed = False }, Cmd.none )
 
@@ -157,12 +164,15 @@ view model =
                   HA.style "opacity" "1"
                 else
                   HA.style "opacity" "0"
-                ] [ div [ HA.class "ck_console" ] model.console
-                    , if model.eggDisplayed then
+                ] [ div [ HA.class "ck_console"
+                    , if model.hasVideo then
+                        HA.style "width" "50%"
+                      else
+                        HA.style "" ""
+                    ] model.console
+                    , if model.eggDisplayed && ( not (EE.isVideo model.loadImg) ) then
                         Html.img [ HA.src ("../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".png") ] []
                       else
-                        span [] []
-                    , if model.eggDisplayed && (not (EE.isVideo model.loadImg) ) then
                         span [ HA.class "videocont" ] [ Html.video ( [ HA.class "vidcontainer" ] ++
                           if String.isEmpty model.current_img_folder then
                             [ HA.src "" ]
@@ -170,8 +180,6 @@ view model =
                             [ HA.src ("../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".mp4")
                             , HA.autoplay True, HA.loop True ]
                             ) [] ]
-                      else
-                        span [] []
                   ]
         ]
 
