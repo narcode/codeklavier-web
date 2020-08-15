@@ -3,6 +3,7 @@ port module Main exposing (..)
 import Browser
 import Html exposing (Html, text, div, h1, h2, h3, br, span)
 import Html.Attributes as HA
+import Html.Events as HE
 import Json.Decode as D
 import EasterEggs as EE
 
@@ -19,6 +20,8 @@ type alias Model =
     , console_open: Bool
     , current_img_folder: String
     , loadImg: String
+    , websocket_host: String
+    , connected: Bool
     }
 
 type alias CK_Message =
@@ -38,24 +41,32 @@ init =
     []
     False
     "asia"
-    "anne"
+    "welcome"
+    ""
+    False
     , Cmd.none )
 
 
 -- PORTS
 port messageReceiver : (String -> msg) -> Sub msg
-
+port sendMessage : String -> Cmd msg
 
 ---- UPDATE ----
 
 
 type Msg
     = Recv String
+    | UpdateIP String
+    | Connect
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
   case msg of
+    UpdateIP string -> ( { model | websocket_host = string }, Cmd.none )
+
+    Connect -> ( { model | connected = True }, sendMessage model.websocket_host )
+
     Recv string ->
       let
           decoded = D.decodeString ckdecoder string
@@ -63,7 +74,7 @@ update msg model =
       case decoded of
         Ok res ->
           let
-              wrapIt = [ span [ HA.class "codespan"] [ text res.payload ] ]
+              wrapIt = [ span [ HA.class ("codespan " ++ res.key ) ] [ text res.payload ] ]
           in
           case res.display of
             "1" ->
@@ -82,7 +93,7 @@ update msg model =
 
             "4" -> ( {model | display4 = model.display4 ++ wrapIt }, Cmd.none )
 
-            "console" -> ( {model | console = wrapIt }, Cmd.none )
+            "console" -> ( {model | console = wrapIt, display1 = wrapIt }, Cmd.none )
 
             "cmd" ->
                 case res.payload of
@@ -106,25 +117,43 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div [ HA.class "container"] [
-          div [HA.class "codeheadings"] [
-            h2 [] [ text "λ functions" ]
-            , h2 [] [ text "Stack" ]
-            , h2 [] [ text "Result" ]
-            , h2 [] [ text "piano functions" ]
-          ]
-          , ( div [HA.class "codecontainer"] ( [] ++ ( makeDisplays model 4 [ span [] [] ] ) ) )
-          , div [ HA.class "imgcontainer"
-            , if String.isEmpty model.current_img_folder then
-                HA.style "background-image" "url(../images/AVeinberg.jpg)"
-              else
-                HA.style "background-image" ("url(../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".png)" )
-              ] []
-          , div [ HA.class "ck_console_container"
-            , if model.console_open then
-                HA.style "opacity" "1"
-              else
-                HA.style "opacity" "0"
-              ] [ div [ HA.class "ck_console" ] model.console ]
+          if not model.connected then
+            div [ HA.class "ipinput"] [
+              Html.input [ HA.id "ipinput"
+                , HA.type_ "text"
+                , HA.placeholder "websocket host IP.."
+                , HE.onInput UpdateIP
+                , HE.on "keydown" (ifIsEnter Connect) ] []
+              , Html.button [ HA.class "button"
+                , HE.onClick Connect  ] [ text "Connect" ]
+            ]
+          else
+            div [HA.class "codeheadings"] [
+              h2 [] [ text "λ functions" ]
+              , h2 [] [ text "Stack" ]
+              , h2 [] [ text "Result" ]
+              , h2 [] [ text "piano functions" ]
+            ]
+            , ( div [HA.class "codecontainer"] ( [] ++ ( makeDisplays model 4 [ span [] [] ] ) ) )
+            , div [ HA.class "imgcontainer"
+              , if String.isEmpty model.current_img_folder then
+                  HA.style "background-color" "black"
+                else
+                  HA.style "background-image" ("url(../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".png)" )
+                ] []
+            , Html.video ( [ HA.class "vidcontainer" ] ++
+                if String.isEmpty model.current_img_folder then
+                  [ HA.src "" ]
+                else
+                  [ HA.src ("../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".mp4")
+                  , HA.autoplay True, HA.loop True ]
+                  ) []
+            , div [ HA.class "ck_console_container"
+              , if model.console_open then
+                  HA.style "opacity" "1"
+                else
+                  HA.style "opacity" "0"
+                ] [ div [ HA.class "ck_console" ] model.console ]
         ]
 
 
@@ -159,6 +188,12 @@ ckdecoder =
       (D.field "key" D.string)
       (D.field "display" D.string)
       (D.field "payload" D.string)
+
+ifIsEnter : msg -> D.Decoder msg
+ifIsEnter msg =
+  D.field "key" D.string
+    |> D.andThen (\key -> if key == "Enter" then D.succeed msg else D.fail "")
+
 
 -- SUBSCRIPTIONS
 

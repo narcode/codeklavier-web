@@ -6,15 +6,18 @@ const app = Elm.Main.init({
   node: document.getElementById('root')
 });
 
-// WebSocket
-// let endpoint = '192.168.1.11' //localip address
-let endpoint = '192.168.178.108'
-let ws = new WebSocket("ws://"+endpoint+":8081/ckar_consume")
 
+app.ports.sendMessage.subscribe(function(ip) {
+// WebSocket
+console.log(ip);
+let ws = new WebSocket("ws://"+ip+":8081/ckar_consume")
+console.log(ws);
 ws.onmessage = function(event) {
   scrollDisplays(event.data);
 	app.ports.messageReceiver.send(event.data);
 };
+
+});
 
 
 function scrollDisplays(data) {
