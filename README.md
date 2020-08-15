@@ -6,4 +6,4 @@ this folder as root of the server.
 php example:
 ``php -S localhost:1234``
 
-and then visit `localhost:1234` on you favourite server/
+and then visit `localhost:1234` on you favourite browser
