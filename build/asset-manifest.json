@@ -1,7 +1,7 @@
 {
-  "main.css": "/static/css/main.5cbf8a14.chunk.css",
-  "main.js": "/static/js/main.b852d9c1.chunk.js",
-  "main.js.map": "/static/js/main.b852d9c1.chunk.js.map",
+  "main.css": "/static/css/main.1cdb13a4.chunk.css",
+  "main.js": "/static/js/main.5a867696.chunk.js",
+  "main.js.map": "/static/js/main.5a867696.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.1b922744.js",
   "runtime~main.js.map": "/static/js/runtime~main.1b922744.js.map",
   "vendors~main.js": "/static/js/vendors~main.b9063112.chunk.js",
@@ -16,6 +16,7 @@
   "images/asia/3.png": "/images/asia/3.png",
   "images/asia/30.png": "/images/asia/30.png",
   "images/asia/76.png": "/images/asia/76.png",
+  "images/asia/asia.png": "/images/asia/asia.png",
   "images/asia/welcome.png": "/images/asia/welcome.png",
   "images/europe/.DS_Store": "/images/europe/.DS_Store",
   "images/europe/100.png": "/images/europe/100.png",
@@ -25,8 +26,9 @@
   "images/europe/155.png": "/images/europe/155.png",
   "images/oceania/.DS_Store": "/images/oceania/.DS_Store",
   "images/oceania/29.png": "/images/oceania/29.png",
+  "images/welcome.png": "/images/welcome.png",
   "index.html": "/index.html",
   "logo.svg": "/logo.svg",
   "manifest.json": "/manifest.json",
-  "precache-manifest.a81d8de2b0c26a459b7c72e52db249e5.js": "/precache-manifest.a81d8de2b0c26a459b7c72e52db249e5.js"
+  "precache-manifest.a5386bd15be649eabb3cda9b93919d39.js": "/precache-manifest.a5386bd15be649eabb3cda9b93919d39.js"
 }

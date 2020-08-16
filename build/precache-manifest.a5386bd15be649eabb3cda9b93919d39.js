@@ -36,6 +36,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/images/asia/76.png"
   },
   {
+    "revision": "9d7124bbf86a3f53cbd7234e416238fb",
+    "url": "/images/asia/asia.png"
+  },
+  {
     "revision": "37277de75311f3c8d26ed75a0cf219f5",
     "url": "/images/asia/welcome.png"
   },
@@ -72,7 +76,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/images/oceania/29.png"
   },
   {
-    "revision": "c446b8deb25d14556aa31f0bba37afaf",
+    "revision": "37277de75311f3c8d26ed75a0cf219f5",
+    "url": "/images/welcome.png"
+  },
+  {
+    "revision": "6e5e2ea2dd11152bc676fe37a865fad9",
     "url": "/index.html"
   },
   {
@@ -84,12 +92,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/manifest.json"
   },
   {
-    "revision": "b852d9c1b9b27149cabf",
-    "url": "/static/css/main.5cbf8a14.chunk.css"
+    "revision": "5a867696c32345394026",
+    "url": "/static/css/main.1cdb13a4.chunk.css"
   },
   {
-    "revision": "b852d9c1b9b27149cabf",
-    "url": "/static/js/main.b852d9c1.chunk.js"
+    "revision": "5a867696c32345394026",
+    "url": "/static/js/main.5a867696.chunk.js"
   },
   {
     "revision": "1b922744246c39b6bc43",
