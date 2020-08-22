@@ -22,14 +22,13 @@ ws.onmessage = function(event) {
 
 function scrollDisplays(data) {
   let d1 = document.querySelector('#display1');
-  let d2 = document.querySelector('#display2');
   let d3 = document.querySelector('#display3');
   let d4 = document.querySelector('#display4');
 
   let obj = JSON.parse(data);
   let display = obj.display;
 
-  [d1, d2, d3, d4].forEach((d)=>{ d.scrollTop = d.scrollHeight})
+  [d1, d3, d4].forEach((d)=>{ d.scrollTop = d.scrollHeight})
 
 }
 

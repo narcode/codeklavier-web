@@ -26,7 +26,12 @@ opacity: 0.9;
 }
 
 video{
-width: 300px;
+width: 35%;
+right:50px;
+}
+
+.videocont{
+width:36%
 }
 
 .codecontainer, .codeheadings{
@@ -108,8 +113,13 @@ justify-content: center;
 transition:opacity 1s;
 }
 
+.small_console{
+height: 30%;
+}
+
 .ck_console{
-font-size: 300%;
+font-size: 100%;
+width:50%;
 }
 
 .ipinput{
@@ -135,7 +145,7 @@ color: #00BCD4;
 }
 
 .egg{
-font-size: 110%;
+font-size: 150%;
 letter-spacing: 4px;
 }
 
@@ -155,7 +165,7 @@ background-color: #000000d1;
 color: #2fe6ff;
 }
 
-.succ, .int{
+.succ, .int, .parenthesisopen, .parenthesisclose {
 color: #2fe6ff
 }
 
@@ -173,4 +183,27 @@ color: yellow
 
 .pred{
 color: white
+}
+
+.ck_img{
+width: 50%;
+height: 100%;
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+}
+
+.comp{
+color: white
+}
+
+.debug{
+background-color: rgba(255,255,255,0.5);
+color: red
+}
+
+.cmd{
+color: black;
+background-color: rgb(33 150 243 / 44%)!important;
+font-size: 60%;
 }

@@ -16,6 +16,7 @@ type alias Model =
     , display2: List (Html Msg)
     , display3: List (Html Msg)
     , display4: List (Html Msg)
+    , stack: List (Html Msg)
     , console: List (Html Msg)
     , console_open: Bool
     , current_img_folder: String
@@ -24,6 +25,8 @@ type alias Model =
     , connected: Bool
     , eggDisplayed: Bool
     , hasVideo: Bool
+    , hasParenthesis: Bool
+    , smaller_console: Bool
     }
 
 type alias CK_Message =
@@ -41,10 +44,13 @@ init =
     []
     []
     []
+    []
     False
     "asia"
     "welcome"
     ""
+    False
+    False
     False
     False
     False
@@ -87,31 +93,73 @@ update msg model =
           case res.display of
             "1" ->
               case res.key of
-                "eval" -> ( {model | display1 = model.display1 ++ wrapIt ++ [ br [] [], br [] [] ] }, Cmd.none )
+                "eval" ->
+                  if model.hasParenthesis then
+                    ( {model | display1 = model.display1 ++ wrapIt ++ [ br [] [], br [] [] ]
+                     }, Cmd.none )
+                  else
+                    ( {model | display1 = model.display1 ++ wrapIt ++ [ br [] [], br [] [] ]
+                    , display2 = [ br [] [] ] ++ model.display2 }, Cmd.none )
+
                 _ -> ( {model | display1 = model.display1 ++ wrapIt }, Cmd.none )
 
             "2" ->
-              case res.key of
-                "eval" -> ( {model | display2 = model.display2 ++ wrapIt ++ [ br [] [], br [] [] ] }, Cmd.none )
-                _ -> ( {model | display2 = model.display2 ++ wrapIt }, Cmd.none )
-
+              case model.display2 of
+                [] -> (model, Cmd.none)
+                x :: xs ->
+                  if model.hasParenthesis then
+                    case res.key of
+                      "parenthesisclose" ->
+                        ( { model | display2 = model.display2 ++ wrapIt
+                          ++ [ br [] [], br [] []] ++ model.stack
+                        , hasParenthesis = False }, Cmd.none )
+                      _ ->
+                        ( { model | display2 = model.display2 ++ wrapIt
+                        , stack = model.stack ++ wrapIt
+                        }, Cmd.none )
+                  else
+                    case res.key of
+                      "parenthesisopen" ->
+                        ( { model | display2 = model.display2 ++ wrapIt
+                        , stack = model.display2 ++ wrapIt
+                        , hasParenthesis = True }, Cmd.none )
+                      _ ->
+                        ( { model | display2 = model.display2 ++ wrapIt
+                        , stack = model.stack ++ wrapIt
+                        }, Cmd.none )
 
             "3" ->
               if List.member res.payload ( List.map String.fromInt <| EE.magicnumbers(model.current_img_folder) ) then
-                if not (EE.isVideo res.payload) then
-                  ( {model | display3 = wrapIt, loadImg = res.payload
-                    , display1 = model.display1 ++ [ br [] [], br [] [] ]
-                    , eggDisplayed = True  }, Cmd.none )
-                else
-                  ( {model | display3 = wrapIt, loadImg = res.payload
-                    , display1 = model.display1 ++ [ br [] [], br [] [] ]
-                    , eggDisplayed = True, hasVideo = True  }, Cmd.none )
+                ( {model | display3 = wrapIt, loadImg = res.payload
+                  -- , display2 = wrapIt ++ model.display2
+                  , display1 = [ br [] [], br [] [] ] ++ model.display1
+                  , display2 = wrapIt ++ model.stack
+                  , eggDisplayed = True, hasVideo = EE.isVideo(res.payload) }, Cmd.none )
               else
-                ( {model | display3 = wrapIt, eggDisplayed = False }, Cmd.none )
+                case res.key of
+                  "cmd" -> ( {model | display3 = wrapIt
+                    , eggDisplayed = False
+                    , hasVideo = False
+                    }, Cmd.none )
+                  _ ->
+                    ( {model | display3 = wrapIt
+                      , display2 = wrapIt
+                      , eggDisplayed = False
+                      , hasVideo = False
+                      }, Cmd.none )
 
-            "4" -> ( {model | display4 = model.display4 ++ wrapIt }, Cmd.none )
+            "4" ->
+              if res.key == "cmd" then
+                case res.payload of
+                  "cleardisplay" -> ( {model | display4 = [ text "" ] }, Cmd.none )
+                  _ -> (model, Cmd.none)
+              else
+                ( {model | display4 = model.display4 ++ wrapIt }, Cmd.none )
 
-            "console" -> ( {model | console = wrapIt }, Cmd.none )
+            "console" ->
+              case res.key of
+                "function" -> ( {model | console = wrapIt, smaller_console=True }, Cmd.none )
+                _ -> ( {model | console = wrapIt, smaller_console = False }, Cmd.none )
 
             "cmd" ->
                 case res.payload of
@@ -143,7 +191,7 @@ view model =
                 , HE.onInput UpdateIP
                 , HE.on "keydown" (ifIsEnter Connect) ] []
               , Html.button [ HA.class "button"
-                , HE.onClick Connect  ] [ text "Connect" ]
+                , HE.onClick Connect ] [ text "Connect" ]
             ]
           else
             div [HA.class "codeheadings"] [
@@ -164,22 +212,33 @@ view model =
                   HA.style "opacity" "1"
                 else
                   HA.style "opacity" "0"
+              , if model.smaller_console then
+                  HA.class "small_console"
+                else
+                  HA.class ""
                 ] [ div [ HA.class "ck_console"
-                    , if model.hasVideo then
+                    , if model.eggDisplayed then
                         HA.style "width" "50%"
                       else
-                        HA.style "" ""
+                        HA.style "width" "100%"
                     ] model.console
-                    , if model.eggDisplayed && ( not (EE.isVideo model.loadImg) ) then
-                        Html.img [ HA.src ("../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".png") ] []
+                    , if model.eggDisplayed && ( not (model.hasVideo) ) then
+                        div [ HA.class "ck_img"
+                          , HA.style "background-image" ("url("
+                              ++ "'../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".png"
+                              ++ "')") ] [ ]
+                          -- Html.img [ HA.src ("../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".png") ] []
                       else
-                        span [ HA.class "videocont" ] [ Html.video ( [ HA.class "vidcontainer" ] ++
-                          if String.isEmpty model.current_img_folder then
-                            [ HA.src "" ]
-                          else
-                            [ HA.src ("../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".mp4")
-                            , HA.autoplay True, HA.loop True ]
-                            ) [] ]
+                        if not model.hasVideo then
+                          span [] []
+                        else
+                          span [ HA.class "videocont" ] [ Html.video ( [ HA.class "vidcontainer" ] ++
+                            if String.isEmpty model.current_img_folder then
+                              [ HA.src "" ]
+                            else
+                              [ HA.src ("../images/" ++ model.current_img_folder ++ "/" ++ model.loadImg ++ ".mp4")
+                              , HA.autoplay True, HA.loop True ]
+                              ) [] ]
                   ]
         ]
 
